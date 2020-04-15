@@ -1,0 +1,32 @@
+{
+  "type": "project",
+  "description": "",
+  "authors": [
+    {
+      "name": "Mariusz Gil",
+      "email": "mariusz@mariuszgil.pl"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "AggregatesByExample\\": "src/"
+    }
+  },
+  "require": {
+    "munusphp/munus": "^0.1.4",
+    "friendsofphp/php-cs-fixer": "^2.16",
+    "league/period": "^4.9",
+    "webmozart/assert": "^1.7",
+    "phpunit/phpunit": "^9.0",
+    "myclabs/php-enum": "^1.7",
+    "ramsey/uuid": "^4.0"
+  },
+  "scripts": {
+    "check-cs": [
+      "php-cs-fixer fix --dry-run --diff"
+    ],
+    "fix-cs": [
+      "php-cs-fixer fix"
+    ]
+  }
+}
