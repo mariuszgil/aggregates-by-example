@@ -15,6 +15,8 @@ This repository contains following examples:
 | ------------ | ----------- | :--------:|:------------------:|
 | [Availability / Resource](examples/example-availability-resource.md) | Reserving resource based on its availability and other policies | PHP | *not available* |
 | [Loan / Loan Application](examples/example-loan-application.md) | Accepting loan application based on attachment verifications | PHP | *not available* |
+| [Cart / Shopping Basket](examples/example-cart.md) | Shopping cart with free items | Java | *in memory hashmap* |
+
 
 #### Info
 
@@ -39,3 +41,4 @@ Authors
 -------
 
 - [Mariusz Gil](https://twitter.com/mariuszgil)
+- [Jakub Pilimon](https://twitter.com/JakubPilimon)
