@@ -1,0 +1,5 @@
+
+# PHP
+examples/php/vendor/
+examples/php/.php_cs.cache
+examples/php/.phpunit.result.cache
