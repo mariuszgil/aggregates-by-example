@@ -1,11 +1,13 @@
-# Aggregates by Example
+![Logo](assets/logo.png)
 
-## Aggregate definition
+Aggregate definition
+--------------------
 
 > Cluster the entities and value objects into aggregates and define boundaries around each. Choose one entity to be the root of each aggregate, and allow external objects to hold references to the root only (references to internal members passed out for use within a single operation only). Define properties and invariants for the aggregate as a whole and give enforcement responsibility to the root or some designated framework mechanism.
 > - Eric Evans, Domain-Driven Design Reference: Definitions and Pattern Summaries
 
-## List of examples
+List of examples
+----------------
 
 This repository contains following examples:
 
@@ -18,7 +20,8 @@ This repository contains following examples:
 
 Presented implementations are just examples to show some concepts. There is almost always more than one valid solution for given requirements.
 
-## Aggregates designing rules
+Aggregates designing rules
+--------------------------
 
 4 rules about designing aggregates by Eric Evans:
 
@@ -27,10 +30,12 @@ Presented implementations are just examples to show some concepts. There is almo
 - Reference other aggregates by identity
 - Use Eventual Consistency outside the boundary 
 
-## Aggregate Design Canvas
+Aggregate Design Canvas
+-----------------------
 
 Coming soon...
 
-## Authors
+Authors
+-------
 
 - [Mariusz Gil](https://twitter.com/mariuszgil)
