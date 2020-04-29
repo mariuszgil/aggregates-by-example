@@ -24,7 +24,7 @@ class LoanApplicationTest extends TestCase
     {
         // Arrange
         list($attachmentId1, $attachmentId2) = $this->prepareAttachmentIds(2);
-        $loanApplication = $this->prepareLoadApplication([$attachmentId1, $attachmentId2], new SingleDecisions());
+        $loanApplication = $this->prepareLoanApplication([$attachmentId1, $attachmentId2], new SingleDecisions());
 
         // Act
         $loanApplication->registerDecision($attachmentId1, Decision::ACCEPTED());
@@ -42,7 +42,7 @@ class LoanApplicationTest extends TestCase
     {
         // Arrange
         list($attachmentId1, $attachmentId2) = $this->prepareAttachmentIds(2);
-        $loanApplication = $this->prepareLoadApplication([$attachmentId1, $attachmentId2], new SingleDecisions());
+        $loanApplication = $this->prepareLoanApplication([$attachmentId1, $attachmentId2], new SingleDecisions());
 
         // Act
         $loanApplication->registerDecision($attachmentId1, Decision::ACCEPTED());
@@ -62,7 +62,7 @@ class LoanApplicationTest extends TestCase
 
         // Arrange
         list($attachmentId1, $attachmentId2) = $this->prepareAttachmentIds(2);
-        $loanApplication = $this->prepareLoadApplication([$attachmentId1, $attachmentId2], new OverwritingDecisions());
+        $loanApplication = $this->prepareLoanApplication([$attachmentId1, $attachmentId2], new OverwritingDecisions());
 
         $loanApplication->registerDecision($attachmentId1, Decision::ACCEPTED());
         $loanApplication->registerDecision($attachmentId2, Decision::ACCEPTED());
@@ -92,7 +92,7 @@ class LoanApplicationTest extends TestCase
      * @return LoanApplication
      * @throws \Exception
      */
-    private function prepareLoadApplication(array $attachmentIds, DecisionRegistrationPolicy $registrationPolicy): LoanApplication
+    private function prepareLoanApplication(array $attachmentIds, DecisionRegistrationPolicy $registrationPolicy): LoanApplication
     {
         return new LoanApplication(
             LoanApplicationId::fromString(Uuid::uuid4()->toString()),
