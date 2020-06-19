@@ -35,7 +35,7 @@ class AttachmentDecisions implements \IteratorAggregate, \Countable
      */
     public function append(AttachmentDecision $decision): self
     {
-        $x = new self($this->decisions + [$decision]);
+        return new self($this->decisions + [$decision]);
     }
 
     /**
