@@ -12,11 +12,6 @@ use Munus\Control\Either\Right;
 
 class NoOverlapping implements Policy
 {
-    /**
-     * @param Period $period
-     * @param GenericList<Period> $periods
-     * @return Either
-     */
     public function isSatisfied(Period $period, GenericList $reservedPeriods): Either
     {
         $overlapped = $reservedPeriods->filter(function (Period $reservedPeriod) use ($period) {

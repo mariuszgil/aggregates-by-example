@@ -11,23 +11,14 @@ use Munus\Control\Either\Right;
 class Resource
 {
     /**
-     * @var ResourceId
-     */
-    private $resourceId;
-
-    /**
      * @var GenericList<Reservation>
      */
-    private $reservations;
+    private GenericList $reservations;
 
-    /**
-     * Resource constructor.
-     * @param ResourceId $resourceId
-     */
-    public function __construct(ResourceId $resourceId)
+
+    public function __construct(public readonly ResourceId $resourceId)
     {
         $this->reservations = GenericList::empty();
-        $this->resourceId = $resourceId;
     }
 
     /**
@@ -61,15 +52,7 @@ class Resource
     public function getReservedPeriods(): GenericList
     {
         return $this->reservations->map(function (Reservation $reservation) {
-            return $reservation->getPeriod();
+            return $reservation->period;
         });
-    }
-
-    /**
-     * @return ResourceId
-     */
-    public function getResourceId(): ResourceId
-    {
-        return $this->resourceId;
     }
 }

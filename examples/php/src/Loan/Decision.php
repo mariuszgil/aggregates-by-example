@@ -4,9 +4,14 @@ namespace AggregatesByExample\Loan;
 
 use MyCLabs\Enum\Enum;
 
-class Decision extends Enum
+enum Decision: string
 {
-    public const NONE = 'none';
-    public const ACCEPTED = 'accepted';
-    public const REJECTED = 'rejected';
+    case NONE = 'none';
+    case ACCEPTED = 'accepted';
+    case REJECTED = 'rejected';
+
+    public function equals(Decision $other): bool
+    {
+        return $this->value === $other->value;
+    }
 }

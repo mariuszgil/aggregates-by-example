@@ -12,25 +12,13 @@ use Munus\Control\Either\Right;
 
 class LimitedDuration implements Policy
 {
-    /**
-     * @var Duration
-     */
-    private $maxDuration;
+    private Duration $maxDuration;
 
-    /**
-     * LimitedReservationDuration constructor.
-     * @param Duration $maxDuration
-     */
     public function __construct(Duration $maxDuration)
     {
         $this->maxDuration = $maxDuration;
     }
 
-    /**
-     * @param Period $period
-     * @param GenericList<Period> $reservedPeriods
-     * @return Either
-     */
     public function isSatisfied(Period $period, GenericList $reservedPeriods): Either
     {
         return $period->durationLessThan($period->withDurationAfterStart($this->maxDuration))
