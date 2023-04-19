@@ -6,35 +6,16 @@ use AggregatesByExample\Loan\AttachmentDecision;
 use AggregatesByExample\Loan\AttachmentDecisions;
 use AggregatesByExample\Loan\DecisionRegistrationPolicy;
 use AggregatesByExample\Loan\LoanApplication;
+use Exception;
 
-class Deadline implements DecisionRegistrationPolicy
+readonly class Deadline implements DecisionRegistrationPolicy
 {
-    /**
-     * @var DecisionRegistrationPolicy
-     */
-    private $policy;
-
-    /**
-     * @var \DateInterval
-     */
-    private $interval;
-
-    /**
-     * Deadline constructor.
-     * @param DecisionRegistrationPolicy $policy
-     * @param \DateInterval $interval
-     */
-    public function __construct(DecisionRegistrationPolicy $policy, \DateInterval $interval)
+    public function __construct(private DecisionRegistrationPolicy $policy, private \DateInterval $interval)
     {
-        $this->policy = $policy;
-        $this->interval = $interval;
     }
 
     /**
-     * @param AttachmentDecision $newDecision
-     * @param LoanApplication $loanApplication
-     * @return AttachmentDecisions
-     * @throws \Exception
+     * @throws Exception
      */
     public function register(AttachmentDecision $newDecision, LoanApplication $loanApplication): AttachmentDecisions
     {

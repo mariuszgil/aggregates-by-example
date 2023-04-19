@@ -6,10 +6,7 @@ use Webmozart\Assert\Assert;
 
 final class ResourceId
 {
-    /**
-     * @var string
-     */
-    private $id;
+    private string $id;
 
     private function __construct(string $id)
     {

@@ -11,6 +11,8 @@ use AggregatesByExample\Loan\LoanApplicationId;
 use AggregatesByExample\Loan\Policy\DecisionProcessing\AllDecidedTo;
 use AggregatesByExample\Loan\Policy\DecisionRegistration\OverwritingDecisions;
 use AggregatesByExample\Loan\Policy\DecisionRegistration\SingleDecisions;
+use DomainException;
+use Exception;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 
@@ -18,7 +20,7 @@ class LoanApplicationTest extends TestCase
 {
     /**
      * @test
-     * @throws \Exception
+     * @throws Exception
      */
     public function applicationDecisionIsMadeAfterAllAttachmentDecisions()
     {
@@ -27,16 +29,16 @@ class LoanApplicationTest extends TestCase
         $loanApplication = $this->prepareLoanApplication([$attachmentId1, $attachmentId2], new SingleDecisions());
 
         // Act
-        $loanApplication->registerDecision($attachmentId1, Decision::ACCEPTED());
-        $loanApplication->registerDecision($attachmentId2, Decision::ACCEPTED());
+        $loanApplication->registerDecision($attachmentId1, Decision::ACCEPTED);
+        $loanApplication->registerDecision($attachmentId2, Decision::ACCEPTED);
 
         // Assert
-        $this->assertEquals(Decision::ACCEPTED(), $loanApplication->getDecision());
+        $this->assertEquals(Decision::ACCEPTED, $loanApplication->getDecision());
     }
 
     /**
      * @test
-     * @throws \Exception
+     * @throws Exception
      */
     public function applicationDecisionIsNotAvailableBeforeAllAttachmentDecisions()
     {
@@ -45,30 +47,30 @@ class LoanApplicationTest extends TestCase
         $loanApplication = $this->prepareLoanApplication([$attachmentId1, $attachmentId2], new SingleDecisions());
 
         // Act
-        $loanApplication->registerDecision($attachmentId1, Decision::ACCEPTED());
+        $loanApplication->registerDecision($attachmentId1, Decision::ACCEPTED);
 
         // Assert
-        $this->assertEquals(Decision::NONE(), $loanApplication->getDecision());
+        $this->assertEquals(Decision::NONE, $loanApplication->getDecision());
     }
 
     /**
      * @test
-     * @throws \Exception
+     * @throws Exception
      */
     public function changingAttachmentDecisionsAfterApplicationDecisionIsForbidden()
     {
         // Assert
-        $this->expectException(\DomainException::class);
+        $this->expectException(DomainException::class);
 
         // Arrange
         list($attachmentId1, $attachmentId2) = $this->prepareAttachmentIds(2);
         $loanApplication = $this->prepareLoanApplication([$attachmentId1, $attachmentId2], new OverwritingDecisions());
 
-        $loanApplication->registerDecision($attachmentId1, Decision::ACCEPTED());
-        $loanApplication->registerDecision($attachmentId2, Decision::ACCEPTED());
+        $loanApplication->registerDecision($attachmentId1, Decision::ACCEPTED);
+        $loanApplication->registerDecision($attachmentId2, Decision::ACCEPTED);
 
         // Act
-        $loanApplication->registerDecision($attachmentId2, Decision::REJECTED());
+        $loanApplication->registerDecision($attachmentId2, Decision::REJECTED);
     }
 
     /**
@@ -90,7 +92,7 @@ class LoanApplicationTest extends TestCase
      * @param array $attachmentIds
      * @param DecisionRegistrationPolicy $registrationPolicy
      * @return LoanApplication
-     * @throws \Exception
+     * @throws Exception
      */
     private function prepareLoanApplication(array $attachmentIds, DecisionRegistrationPolicy $registrationPolicy): LoanApplication
     {
@@ -98,7 +100,7 @@ class LoanApplicationTest extends TestCase
             LoanApplicationId::fromString(Uuid::uuid4()->toString()),
             AttachmentDecisions::createFor($attachmentIds),
             $registrationPolicy,
-            new AllDecidedTo(Decision::ACCEPTED(), Decision::ACCEPTED())
+            new AllDecidedTo(Decision::ACCEPTED, Decision::ACCEPTED)
         );
     }
 }

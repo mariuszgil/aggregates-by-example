@@ -11,18 +11,8 @@ namespace AggregatesByExample\Loan;
  */
 class AttachmentContent
 {
-    /**
-     * @var AttachmentId
-     */
-    private $id;
-
-    /**
-     * AttachmentContent constructor.
-     * @param AttachmentId $id
-     */
-    public function __construct(AttachmentId $id)
+    public function __construct(public readonly AttachmentId $id)
     {
-        $this->id = $id;
     }
 
     // ...

@@ -11,11 +11,6 @@ use Munus\Control\Either\Right;
 
 class NoGapsBetween implements Policy
 {
-    /**
-     * @param Period $period
-     * @param GenericList<Period> $reservedPeriods
-     * @return Either
-     */
     public function isSatisfied(Period $period, GenericList $reservedPeriods): Either
     {
         $touched = $reservedPeriods->filter(function (Period $reservedPeriod) use ($period) {
@@ -24,6 +19,6 @@ class NoGapsBetween implements Policy
 
         return $reservedPeriods->isEmpty() || $touched->length() >= 1
             ? new Right(new Allowance())
-            : new Left(new Rejection('Reservation must abust with previous ones'));
+            : new Left(new Rejection('Reservation must abuse with previous ones'));
     }
 }
